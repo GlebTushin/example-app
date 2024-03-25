@@ -20,12 +20,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/date',DateController::class);
-Route::get('/timezone',[TimezoneController::class,'get_timezone']);
-Route::get('/books',[BookController::class,'index'])->name('books.index');
-Route::get('/books/create',[BookController::class,'create'])->name('books.create');
-Route::post('/books',[BookController::class,'store'])->name('books.store');
-Route::get('/books/{book}',[BookController::class,'show'])->name('books.show');
-Route::get('/books/{book}/edit',[BookController::class,'edit'])->name('books.edit');
-Route::patch('/books/{book}',[BookController::class,'update'])->name('books.update');
-Route::delete('/books',[BookController::class,'delete'])->name('books.destroy');
+Route::get('/date',DateController::class)->middleware('auth');
+Route::get('/timezone',[TimezoneController::class,'get_timezone'])->middleware('auth');
+Route::get('/books',[BookController::class,'index'])->name('books.index')->middleware('auth');
+Route::get('/books/create',[BookController::class,'create'])->name('books.create')->middleware('auth');
+Route::post('/books',[BookController::class,'store'])->name('books.store')->middleware('auth');
+Route::get('/books/{book}',[BookController::class,'show'])->name('books.show')->middleware('auth');
+Route::get('/books/{book}/edit',[BookController::class,'edit'])->name('books.edit')->middleware('auth');
+Route::patch('/books/{book}',[BookController::class,'update'])->name('books.update')->middleware('auth');
+Route::delete('/books',[BookController::class,'delete'])->name('books.destroy')->middleware('auth');
